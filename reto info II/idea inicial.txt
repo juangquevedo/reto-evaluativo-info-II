@@ -1,0 +1,12 @@
+Mi idea inicial es usar 4 archivos de texto, el primero para la contraseña
+del administrador, el segundo para los productos del inventario, el tercero
+para los combos que se ofrecen y en el cuarto se almacenan las ventas.
+Usar 2 clasees una para crear y modificar los productos del iventario,
+estos productos tendran 4 parametos que seran nombre del producto, unidades 
+por producto, cantidad de producto y costo total (que sera
+unidades*cantidad*precioxcantidad) y la otra clase para crear los combos y
+con esta modificar el inventario cada vez que 
+un usuario compra.
+Usar un contenedor tipo map para acceder al los productos del
+inventario y modificarlos cada vez que se realiza una compra.
+y con funciones hacer el resto de acciones del programa.
