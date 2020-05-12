@@ -21,3 +21,29 @@ combo::combo(){
 void combo::ver_combo(){
     cout<<'|'<<contenido<<'|'<<costo<<"|\n";
 }
+
+string combo::guardado(){
+    //facilita la funcion de guardado retornando en un string los datos privados a guardar
+    string datos;
+    map <int,int>::iterator it;
+    datos=contenido + ';';
+    for(it=ff.begin();it!=ff.end();it++)
+        datos= datos + int2str(it->first) + '-' + int2str(it->second) + ';';
+    datos=datos + int2str(costo);
+    return datos;
+}
+
+string combo::int2str(int long long a){
+    int long long c=0,i=1;
+    char e;
+    string b;
+    for(;(a/i);i=i*10)
+        c++;
+    for(int j=0;j<c;j++){
+        i/=10;
+        e=(a/i)+48;
+        b.push_back(e);
+        a-=(a/i)*i;
+    }
+    return b;
+}

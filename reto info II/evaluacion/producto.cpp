@@ -28,3 +28,30 @@ void producto::sacar_producto(int num){
 void producto::ver_producto(){
     cout<<'|'<<nombre<<'|'<<cantidad<<'|'<<costo<<'|';
 }
+string producto::guardado(){
+    //facilita la funcion de guardado retornando en un string los datos privados a guardar
+    string datos;
+    datos=nombre+';'+int2str(unidades_p)+';'+int2str(unidades_a)+';'+int2str(cantidad)+';'+int2str(costo);
+    return datos;
+}
+
+string producto::int2str(int long a){
+    int c=0,i=1;
+    char e;
+    string b;
+    for(;(a/i);i=i*10)
+        c++;
+    for(int j=0;j<c;j++){
+        i/=10;
+        e=(a/i)+48;
+        b.push_back(e);
+        a-=(a/i)*i;
+    }
+    return b;
+}
+
+
+
+
+
+
