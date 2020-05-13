@@ -1,15 +1,11 @@
 #include "producto.h"
 //pide los valores para crear un objeto de la clase producto
-producto::producto(){
-    cout << "nombre del prducto: ";
-    cin>>nombre;
-    cout<<"cuantas unidades trae cada producto: ";
-    cin>>unidades_a;
-    unidades_p=unidades_a;
-    cout<<"que cantidad hay de producto: ";
-    cin>>cantidad;
-    cout<<"cual es el costo total de este inventario: ";
-    cin>>costo;
+void producto::crear(string name,int uni_p,int uni_a,int cant,int long long cost){
+    nombre=name;
+    unidades_p=uni_p;
+    unidades_a=uni_a;
+    cantidad=cant;
+    costo=cost;
 }
 //con los valores de producto a sacar edita el inventario(la cantidad de productos disponibles y el costo del inventario)
 void producto::sacar_producto(int num){
@@ -26,7 +22,20 @@ void producto::sacar_producto(int num){
 }
 //perite ver el nombre del producto, la cantidad y el costo, facilita la visualizacion de los productos en el sistema
 void producto::ver_producto(){
-    cout<<'|'<<nombre<<'|'<<cantidad<<'|'<<costo<<'|';
+    cout<<'|'<<nombre;
+    for(unsigned int i=0;i<(50-nombre.length());i++)
+        cout<<' ';
+    cout<<'|';
+    if(cantidad<100 && cantidad>10)
+        cout<<" ";
+    else
+        cout<<"  ";
+    cout<<cantidad<<'|';
+    if(costo>=1000 && costo<10000)
+        cout<<"  ";
+    else if(costo>=10000 && costo<100000)
+        cout<<" ";
+    cout<<costo<<'|';
 }
 string producto::guardado(){
     //facilita la funcion de guardado retornando en un string los datos privados a guardar

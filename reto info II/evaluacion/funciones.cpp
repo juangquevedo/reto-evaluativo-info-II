@@ -15,16 +15,103 @@ void iniciar_admi(map <int,producto> &inv,map <int,combo> &com){
 
 void administrador(map <int,producto> &inv,map <int,combo> &com){
     //esta es la interfaz que manejara el administrador
-    map <int,producto>::iterator ii;
-    map <int,combo>::iterator ic;
-    ic=com.begin();
+    short op;
     cout<<"\nEste es el inventario actual\n";
-    for(ii=inv.begin();ii!=inv.begin();ii++){
-        if(ii->first<10)
-            cout<<"| "<<ii->first;
-        else
-            cout<<'|'<<ii->first;
-        ii->second.ver_producto();
+    mostrar_inv(inv);
+    while(true){
+    cout<<"Que desea hacer?\n1)Ingresar un nuevo producto\n2)Crear un nuevo combo\n3)ver un el reporte de ventas\n0)Salir\n(digite el numero de la opcion a realizar) ";
+    cin>>op;
+    switch(op){
+    case 1:
+        agregar_pro(inv);
+        break;
+    case 2:
+        crear_combo(com);
+        break;
+    case 3:
+        break;
+    case 0:
+        return;
+    default:
+        cout<<"\nLa opcion digitada es invalida intente otra vez\n";
+        system("pause");
+        break;
+    }}
+}
+
+void iniciar_inv(map <int,producto> &inv){
+    string temp="",name,datos=leer_Txt("inventario.txt");
+    int id,j;
+    int long long temp_int[4];
+    producto a;
+    for(unsigned long int i=0;i<datos.length();i++){
+        j=0;
+        while(i<datos.length()){
+            if(datos[i]==';' || datos[i]=='\n' || i+1==datos.length()){
+                if(i+1==datos.length()) temp.push_back(datos[i]);
+                if(j==0){
+                    inv.insert(pair<int,producto>(str2int(temp),a));
+                    id=str2int(temp);}
+                else if(j==1)
+                    name=temp;
+                else if(j==2)
+                    temp_int[0]=str2int(temp);
+                else if(j==3)
+                    temp_int[1]=str2int(temp);
+                else if(j==4)
+                    temp_int[2]=str2int(temp);
+                else if(j==5)
+                    temp_int[3]=str2int(temp);
+                temp="";
+                if(datos[i]=='\n') break;
+                j++;
+            }
+            else
+                temp.push_back(datos[i]);
+            i++;
+        }
+        inv[id].crear(name,temp_int[0],temp_int[1],temp_int[2],temp_int[3]);
+    }
+}
+void iniciar_com(map <int,combo> &com){
+    map <int,int> ff;
+    map <int,int>::iterator it;
+    string temp="",name,datos=leer_Txt("combos.txt");
+    combo a;
+    int j,num,cont[2];
+    long long int costo;
+    for(unsigned long int i=0;i<datos.length();i++){
+        j=0;
+        while(i<datos.length()){
+            if(datos[i]==';' || datos[i]=='\n' || i+1==datos.length()){
+                if(i+1==datos.length()) temp.push_back(datos[i]);
+                if(j==0){
+                    com.insert(pair<int,combo>(str2int(temp),a));
+                    num=str2int(temp);}
+                else if(j==1)
+                    name=temp;
+                else if(j==2)
+                    costo=str2int(temp);
+                else{
+                    cont[1]=str2int(temp);
+                    ff.insert(pair<int,int>(cont[0],cont[1]));
+                }
+                temp="";
+                if(datos[i]=='\n') break;
+                j++;
+            }
+            else if (datos[i]=='-'){
+                cont[0]=str2int(temp);
+                temp="";
+            }
+            else
+                temp.push_back(datos[i]);
+            i++;
+        }
+        com[num].iniciar(name,costo,ff);
+        while(ff.size()!=0){
+            it=ff.begin();
+            ff.erase(it->first);}
     }
 }
 
@@ -50,10 +137,67 @@ void guardar_com(map <int,combo> &inv){
     escribir_txt(datos,"combos.txt");
 }
 
+void mostrar_inv(map <int,producto> inv){
+    map <int,producto>::iterator ii;
+    cout<<"|ID|                     producto                |cantidad|costo |\n";
+    for(int i=0;i<65;i++) cout<<'-';
+    cout<<endl;
+    for(ii=inv.begin();ii!=inv.end();ii++){
+        if(ii->first<10)
+            cout<<"| "<<ii->first;
+        else
+            cout<<'|'<<ii->first;
+        ii->second.ver_producto();
+        cout<<endl;
+        for(int i=0;i<65;i++) cout<<'-';
+        cout<<endl;
+    }
+}
 
+void mostrar_com(map <int,combo> com){
+    map <int,combo>::iterator ic;
+    for(int i=0;i<65;i++) cout<<'-';
+    cout<<endl;
+    for(ic=com.begin();ic!=com.end();ic++){
+        if(ic->first<10)
+            cout<<"| "<<ic->first;
+        else
+            cout<<'|'<<ic->first;
+        ic->second.ver_combo();
+        for(int i=0;i<65;i++) cout<<'-';
+        cout<<endl;
+    }
+}
 
+void agregar_pro(map <int,producto> &inv){
+    map <int,producto>::iterator ii=inv.end()--;
+    producto a;
+    int id=(ii->first)+1;
+    string nombre;
+    int unid[2];
+    long long int costo;
+    cout<<"Cual es el nombre del producto (porfavor remplace los espacios por '_'): ";
+    cin>>nombre;
+    cout<<"Cuantas unidades trae cada producto: ";
+    cin>>unid[0];
+    cout<<"Cual es la cantidad de producto: ";
+    cin>>unid[1];
+    cout<<"Cual es el costo total de todo el producto: ";
+    cin>>costo;
+    a.crear(nombre,unid[0],unid[0],unid[1],costo);
+    inv.insert(pair<int,producto>(id,a));
+}
 
-
+void crear_combo(map <int,combo> &com){
+    cout<<"\nEstos son los combos actuales\n";
+    mostrar_com(com);
+    map <int,combo>::iterator ic=com.end();
+    ic--;
+    int num=ic->first+1;
+    combo b;
+    b.crear();
+    com.insert(pair<int,combo>(num,b));
+}
 
 
 

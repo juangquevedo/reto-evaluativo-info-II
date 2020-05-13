@@ -1,13 +1,10 @@
-#include <iostream>
-
-using namespace std;
-
-#include <map>
+#include "producto.h"
 
 class combo
 {
 public:
-    combo();
+    void crear();
+    void iniciar(string cont, long long int cost, map <int,int> ff);
     void ver_combo();
     string guardado();
 private:

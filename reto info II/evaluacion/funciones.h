@@ -1,18 +1,15 @@
-#include <iostream>
-
-using namespace std;
-#include <fstream>
-#include <math.h>
-
 #include "combo.h"
-#include "producto.h"
-#include <map>
 
 void iniciar_admi(map <int,producto> &inv,map <int,combo> &com);
 void administrador(map <int,producto> &inv,map <int,combo> &com);
 void guardar_inv(map <int,producto> &inv);
-
-
+void guardar_com(map <int,combo> &inv);
+void iniciar_inv(map <int,producto> &inv);
+void iniciar_com(map <int,combo> &com);
+void mostrar_inv(map <int,producto> inv);
+void mostrar_com(map <int,combo> com);
+void agregar_pro(map <int,producto> &inv);
+void crear_combo(map <int,combo> &com);
 
 
 

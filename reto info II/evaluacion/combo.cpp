@@ -1,6 +1,7 @@
 #include "combo.h"
 
-combo::combo(){
+
+void combo::crear(){
     int temp[2];
     bool ban=1;
     cout<<"cual es el contenido del combo: ";
@@ -18,18 +19,29 @@ combo::combo(){
     cin>>costo;
 }
 
+void combo::iniciar(string cont, long long cost, map<int, int> f){
+    contenido=cont;
+    costo=cost;
+    ff=f;
+}
+
 void combo::ver_combo(){
-    cout<<'|'<<contenido<<'|'<<costo<<"|\n";
+    cout<<'|'<<contenido;
+    for(unsigned int i=0;i<(50-contenido.length());i++) cout<<' ';
+    cout<<'|';
+    if(costo>=1000 && costo<10000) cout<<"  ";
+    else cout<<" ";
+    cout<<costo<<"|\n";
 }
 
 string combo::guardado(){
     //facilita la funcion de guardado retornando en un string los datos privados a guardar
     string datos;
     map <int,int>::iterator it;
-    datos=contenido + ';';
+    datos=contenido + ';' + int2str(costo) + ';';
     for(it=ff.begin();it!=ff.end();it++)
         datos= datos + int2str(it->first) + '-' + int2str(it->second) + ';';
-    datos=datos + int2str(costo);
+    datos.pop_back();
     return datos;
 }
 

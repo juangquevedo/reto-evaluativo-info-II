@@ -1,11 +1,14 @@
 #include <iostream>
 
 using namespace std;
+#include <fstream>
+#include <math.h>
+#include <map>
 
 class producto
 {
 public:
-    producto();
+    void crear(string name,int uni_p,int uni_a,int cant,int long long cost);
     void sacar_producto(int num);
     void ver_producto();
     string guardado();

@@ -112,7 +112,8 @@ compiler_clean:
 
 ####### Compile
 
-release/combo.o: ../evaluacion/combo.cpp ../evaluacion/combo.h
+release/combo.o: ../evaluacion/combo.cpp ../evaluacion/combo.h \
+		../evaluacion/producto.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\combo.o ..\evaluacion\combo.cpp
 
 release/funciones.o: ../evaluacion/funciones.cpp ../evaluacion/funciones.h \
