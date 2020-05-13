@@ -2,14 +2,16 @@
 
 void iniciar_admi(map <int,producto> &inv,map <int,combo> &com);
 void administrador(map <int,producto> &inv,map <int,combo> &com);
+void usuario(map <int,producto> &inv,map <int,combo> com);
 void guardar_inv(map <int,producto> &inv);
 void guardar_com(map <int,combo> &inv);
 void iniciar_inv(map <int,producto> &inv);
 void iniciar_com(map <int,combo> &com);
 void mostrar_inv(map <int,producto> inv);
-void mostrar_com(map <int,combo> com);
+void mostrar_com(map <int,combo> com,map <int,producto> inv);
 void agregar_pro(map <int,producto> &inv);
-void crear_combo(map <int,combo> &com);
+void crear_combo(map <int,combo> com,map <int,producto> inv);
+void guardar_reporte(string hist);
 
 
 
@@ -25,5 +27,6 @@ void escribir_txt(string texto,string arch);
 
 
 //importados de la practica 2
+void devolver(int long long a);
 long int str2int(string a);
 string int2str(int long a);

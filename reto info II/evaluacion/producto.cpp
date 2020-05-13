@@ -6,6 +6,7 @@ void producto::crear(string name,int uni_p,int uni_a,int cant,int long long cost
     unidades_a=uni_a;
     cantidad=cant;
     costo=cost;
+    disponible=((uni_p-1)*cant)+uni_a;
 }
 //con los valores de producto a sacar edita el inventario(la cantidad de productos disponibles y el costo del inventario)
 void producto::sacar_producto(int num){
@@ -19,6 +20,7 @@ void producto::sacar_producto(int num){
         unidades_a=unidades_p;
         cantidad--;
     }
+    disponible=((unidades_p-1)*cantidad)+unidades_a;
 }
 //perite ver el nombre del producto, la cantidad y el costo, facilita la visualizacion de los productos en el sistema
 void producto::ver_producto(){

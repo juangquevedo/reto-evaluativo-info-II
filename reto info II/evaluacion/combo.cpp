@@ -25,13 +25,14 @@ void combo::iniciar(string cont, long long cost, map<int, int> f){
     ff=f;
 }
 
-void combo::ver_combo(){
-    cout<<'|'<<contenido;
-    for(unsigned int i=0;i<(50-contenido.length());i++) cout<<' ';
-    cout<<'|';
-    if(costo>=1000 && costo<10000) cout<<"  ";
-    else cout<<" ";
-    cout<<costo<<"|\n";
+string combo::ver_combo(){
+    string ver='|' + contenido;
+    for(unsigned int i=0;i<(50-contenido.length());i++) ver.push_back(' ');
+    ver.push_back('|');
+    if(costo>=1000 && costo<10000) ver= ver + "  ";
+    else ver.push_back(' ');
+    ver= ver + int2str(costo) + '|';
+    return ver;
 }
 
 string combo::guardado(){
@@ -43,6 +44,22 @@ string combo::guardado(){
         datos= datos + int2str(it->first) + '-' + int2str(it->second) + ';';
     datos.pop_back();
     return datos;
+}
+
+bool combo::disponibilidad(map<int, producto> inv){
+    map <int,int>::iterator it;
+    for(it=ff.begin();it!=ff.end();it++){
+        if(inv[it->first].disponible<unsigned(it->second) || inv.find(it->first)==inv.end())
+            return 0;
+    }
+    return 1;
+}
+
+void combo::comprar_com(map<int, producto> &inv){
+    map <int,int>::iterator it;
+    for(it=ff.begin();it!=ff.end();it++){
+        inv[it->first].sacar_producto(it->second);
+    }
 }
 
 string combo::int2str(int long long a){

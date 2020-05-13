@@ -26,7 +26,7 @@ void administrador(map <int,producto> &inv,map <int,combo> &com){
         agregar_pro(inv);
         break;
     case 2:
-        crear_combo(com);
+        crear_combo(com,inv);
         break;
     case 3:
         break;
@@ -37,6 +37,55 @@ void administrador(map <int,producto> &inv,map <int,combo> &com){
         system("pause");
         break;
     }}
+}
+
+void usuario(map <int,producto> &inv,map <int,combo> com){
+    int temp;
+    unsigned long long int precio=0,pago;
+    bool ban=1;
+    list <int> pedido;
+    list <int>::iterator lit;
+    string history,silla [2];
+    while (ban){
+        cout<<"\nEstos son los combos que ofrecemos\n";
+        mostrar_com(com,inv);
+        cout<<"\nDigite el numero del combo que desea ordenar: ";
+        cin>>temp;
+        if(temp<1 || temp>signed(com.size()))
+            cout<<"\nEl combo elegido no esta en las opciones\n";
+        else if(!com[temp].disponibilidad(inv))
+            cout<<"\nPor el momento este combo no se encuentra disponible\n";
+        else{
+            pedido.push_back(temp);
+            cout<<"\nDesea ordenar algo mas? (1 si, 0 no): ";
+            cin>>ban;}
+    }
+    pedido.sort(); //no es necesario pero prefiero ponerlo
+    for(lit=pedido.begin();lit!=pedido.end();lit++)
+        precio+=com[*lit].costo;
+    cout<<"\nEl precio total seria "<<precio<<'\n';
+    ban=1;
+    while(ban){
+        cout<<"\nIngrese la cantidad con la que pagara: ";
+        cin>>pago;
+        if(pago<precio) cout<<"la cantidad ingresada es menor a la cantidad a pagar, ingrese un monto mayor\n";
+        else ban=0;
+    }
+    if(pago==precio)
+        cout<<"\nLa cantidad dada es exacta\n";
+    else
+        devolver(pago-precio);
+    for(lit=pedido.begin();lit!=pedido.end();lit++){
+        com[*lit].comprar_com(inv);
+        history= history + com[*lit].ver_combo() + '\n';
+    }
+    cout<<"\nCuando su pedido este listo le llevaremos el pedido a su asiento\nIngrese la sala en la que ver la pelicula: ";
+    cin>>silla[0];
+    cout<<"\nIngrese su asiento: ";
+    cin>>silla[1];
+    history= history + "el monto pagado fue de " + int2str(precio) + "\nEl pedido fue entrgado en la sala: " + silla[0] + " asiento: " +silla[1];
+    cout<<history<<endl;
+    guardar_reporte(history);
 }
 
 void iniciar_inv(map <int,producto> &inv){
@@ -154,17 +203,19 @@ void mostrar_inv(map <int,producto> inv){
     }
 }
 
-void mostrar_com(map <int,combo> com){
+void mostrar_com(map <int,combo> com,map <int,producto> inv){
     map <int,combo>::iterator ic;
-    for(int i=0;i<65;i++) cout<<'-';
+    for(int i=0;i<62;i++) cout<<'-';
     cout<<endl;
     for(ic=com.begin();ic!=com.end();ic++){
         if(ic->first<10)
             cout<<"| "<<ic->first;
         else
             cout<<'|'<<ic->first;
-        ic->second.ver_combo();
-        for(int i=0;i<65;i++) cout<<'-';
+        cout<<ic->second.ver_combo();
+        if(!(ic->second.disponibilidad(inv))) cout<<"producto no disponible por el momento";
+        cout<<endl;
+        for(int i=0;i<62;i++) cout<<'-';
         cout<<endl;
     }
 }
@@ -188,9 +239,9 @@ void agregar_pro(map <int,producto> &inv){
     inv.insert(pair<int,producto>(id,a));
 }
 
-void crear_combo(map <int,combo> &com){
+void crear_combo(map <int,combo> com,map <int,producto> inv){
     cout<<"\nEstos son los combos actuales\n";
-    mostrar_com(com);
+    mostrar_com(com,inv);
     map <int,combo>::iterator ic=com.end();
     ic--;
     int num=ic->first+1;
@@ -199,7 +250,15 @@ void crear_combo(map <int,combo> &com){
     com.insert(pair<int,combo>(num,b));
 }
 
-
+void guardar_reporte(string hist){
+    string fecha,datos=leer_Txt("reporte.txt");
+    time_t now= time(0);
+    tm *time= localtime(&now);
+    fecha=int2str(time->tm_mday)+ "/" + int2str(time->tm_mon+1) + '/' + int2str(1900+time->tm_year);
+    fecha=fecha + "   " + int2str(time->tm_hour) + ':' + int2str(time->tm_min) + ':' + int2str(time->tm_sec) + '\n';
+    fecha=datos + fecha + hist + "\n\n ";
+    escribir_txt((fecha),"reporte.txt");
+}
 
 
 
@@ -319,6 +378,18 @@ void escribir_txt(string texto,string arch){
 }
 
 //importados de la practica 2
+
+void devolver(int long long a){
+    int long long c;
+    int long long b[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+    cout<<"\nDevolucion\n";
+    for(int long long i=0;i<10;i++){
+        c=a/b[i];
+        a%=b[i];
+        cout<<b[i]<<": "<<c<<endl;
+    }
+    cout<<"Faltante: "<<a<<endl;
+}
 
 long int str2int(string a){
     //esta funcion recibe un string y lo convierte en un entero

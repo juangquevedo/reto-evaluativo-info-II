@@ -1,0 +1,10 @@
+13/5/2020   13:51:21
+|Dos_perros_calientes_y_dos_gaseosas               | 35000|
+el monto pagado fue de 35000
+El pedido fue entrgado en la sala: 2 asiento: H3
+13/5/2020   13:52:44
+|Hamburguesa_mas_gaseosa                           | 16500|
+|Hamburguesa_mas_gaseosa                           | 16500|
+|Hamburguesa_mas_gaseosa                           | 16500|
+el monto pagado fue de 49500
+El pedido fue entrgado en la sala: 5 asiento: J12
