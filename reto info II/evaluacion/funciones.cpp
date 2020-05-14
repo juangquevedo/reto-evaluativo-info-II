@@ -78,7 +78,7 @@ recibe como parametros los map que contiene el inventario y  los  combos para mo
     }
 }
 
-void ingresar_usu(map <int,producto> &inv,map <int,combo> com){
+void ingresar_usu(map <int,producto> &inv,map <int,combo> &com){
 /*esta es la funcion que se encarga de pedir la cedula y la clave del usuario,
 creando un map donde almacena la cedula y clave de cada usuario que este en "usuarios.txt"
 para poder pedir la comida, recibe como parametros los maps que contienen el inventario y
@@ -108,7 +108,7 @@ de 3 intentos no se comprueba se devuelve al menu principal*/
     }
 }
 
-void usuario(map <int,producto> &inv,map <int,combo> com,string usuario){
+void usuario(map <int,producto> &inv,map <int,combo> &com,string usuario){
 /*esta es la funcion que le permite al usuario comprar combos
 y registra cada compra en el archivo reporte.txt*/
     int temp;
@@ -122,12 +122,13 @@ y registra cada compra en el archivo reporte.txt*/
         mostrar_com(com,inv);
         cout<<"\nDigite el numero del combo que desea ordenar: ";
         cin>>temp;
-        if(temp<1 || temp>signed(com.size()))
+        if(temp<1 || com.find(temp)==com.end())
             cout<<"\nEl combo elegido no esta en las opciones\n";
         else if(!com[temp].disponibilidad(inv))
             cout<<"\nPor el momento este combo no se encuentra disponible\n";
         else{
             pedido.push_back(temp);
+            com[temp].comprar_com(inv);
             cout<<"\nDesea ordenar algo mas? (1 si, 0 no): ";
             cin>>ban;}
     }
@@ -147,7 +148,6 @@ y registra cada compra en el archivo reporte.txt*/
     else
         devolver(pago-precio);
     for(lit=pedido.begin();lit!=pedido.end();lit++){
-        com[*lit].comprar_com(inv);
         history= history + com[*lit].ver_combo() + '\n';
     }
     ban=0;
@@ -202,7 +202,7 @@ void agregar_pro(map <int,producto> &inv){
     inv.insert(pair<int,producto>(id,a));
 }
 
-void crear_combo(map <int,combo> &com,map <int,producto> inv){
+void crear_combo(map <int,combo> &com,map <int,producto> &inv){
 /*esta funcion recibe como parametro el map de combos y el map con el inventario,
 para crear un combo con base al inventario actual*/
     cout<<"\nEstos son los combos actuales\n";
@@ -219,7 +219,7 @@ para crear un combo con base al inventario actual*/
     com.insert(pair<int,combo>(num,b));
 }
 
-void mostrar_inv(map <int,producto> inv){
+void mostrar_inv(map <int,producto> &inv){
 //esta funcion recibe el map que contien el inventario para imprimir el inventario en una tabla
     map <int,producto>::iterator ii;
     cout<<"|ID|                     producto                |cantidad|costo |\n";
@@ -237,7 +237,7 @@ void mostrar_inv(map <int,producto> inv){
     }
 }
 
-void mostrar_com(map <int,combo> com,map <int,producto> inv){
+void mostrar_com(map <int,combo> &com,map <int,producto> &inv){
 /*esta funcion recibe el map que contiene a los combos y los imprime en una tabla y
 imprime a su lado si esta disponible o no basandose en el inventario, ayudandose de
 la funcion propia de la clase combos "ver_combo"*/

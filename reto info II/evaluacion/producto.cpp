@@ -6,7 +6,8 @@ void producto::crear(string name,int uni_p,int uni_a,int cant,int long long cost
     unidades_a=uni_a;
     cantidad=cant;
     costo=cost;
-    disponible=((uni_p-1)*cant)+uni_a;
+    if(cant==1) disponible=uni_a;
+    else disponible=((uni_p-1)*cant)+uni_a;
 }
 //con los valores de producto a sacar edita el inventario(la cantidad de productos disponibles y el costo del inventario)
 void producto::sacar_producto(int num){
@@ -19,8 +20,10 @@ void producto::sacar_producto(int num){
     if(unidades_a==0){
         unidades_a=unidades_p;
         cantidad--;
+        if(cantidad==0)unidades_a=0;
     }
-    disponible=((unidades_p-1)*cantidad)+unidades_a;
+    if(cantidad==0) disponible=0;
+    else disponible=((unidades_p-1)*cantidad)+unidades_a;
 }
 //perite ver el nombre del producto, la cantidad y el costo, facilita la visualizacion de los productos en el sistema
 void producto::ver_producto(){
@@ -41,6 +44,9 @@ void producto::ver_producto(){
 }
 void producto::anadir_cant(int can){
     cantidad+=can;
+    if(unidades_a==0)
+        unidades_a=unidades_p;
+    disponible=((unidades_p-1)*cantidad)+unidades_a;
 }
 string producto::guardado(){
     //facilita la funcion de guardado retornando en un string los datos privados a guardar

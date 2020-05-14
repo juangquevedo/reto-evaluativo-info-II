@@ -18,3 +18,30 @@ la compra fue realizada por el usuario: 1005815442
 El monto pagado fue de 31400
 El pedido fue entrgado en la sala: 5 asiento: H16
 
+14/5/2020   :16:35
+|Dos_gaseosas_y_crispeta                           | 25000|
+|perro_y_gaseosa_mas_chocolatina                   | 18000|
+la compra fue realizada por el usuario: 1234567890
+El monto pagado fue de 43000
+El pedido fue entrgado en la sala: 3 asiento: J12
+
+14/5/2020   :20:12
+|Dos_gaseosas_y_crispeta                           | 25000|
+|Hamburguesa_mas_te                                | 15900|
+la compra fue realizada por el usuario: 1111111111
+El monto pagado fue de 40900
+El pedido fue entrgado en la sala: 5 asiento: G21
+
+14/5/2020   :23:30
+|Hamburguesa_mas_te                                | 15900|
+la compra fue realizada por el usuario: 1005815443
+El monto pagado fue de 15900
+El pedido fue entrgado en la sala: 6 asiento: K9
+
+14/5/2020   :49:11
+|Dos_gaseosas_y_crispeta                           | 25000|
+|te_mas_papas                                      |  7000|
+la compra fue realizada por el usuario: 1234567890
+El monto pagado fue de 32000
+El pedido fue entrgado en la sala: 5 asiento: F14
+

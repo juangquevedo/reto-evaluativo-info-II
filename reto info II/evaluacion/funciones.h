@@ -4,13 +4,13 @@
 
 void iniciar_admi(map <int,producto> &inv,map <int,combo> &com); //3
 void administrador(map <int,producto> &inv,map <int,combo> &com); //18
-void ingresar_usu(map <int,producto> &inv,map <int,combo> com); //81
-void usuario(map <int,producto> &inv,map <int,combo> com,string usuario); //111
+void ingresar_usu(map <int,producto> &inv,map <int,combo> &com); //81
+void usuario(map <int,producto> &inv,map <int,combo> &com,string usuario); //111
 void registrar_usu(); //167
 void agregar_pro(map <int,producto> &inv); //183
-void crear_combo(map <int,combo> &com,map <int,producto> inv); //205
-void mostrar_inv(map <int,producto> inv); //222
-void mostrar_com(map <int,combo> com,map <int,producto> inv); //240
+void crear_combo(map <int,combo> &com,map <int,producto> &inv); //205
+void mostrar_inv(map <int,producto> &inv); //222
+void mostrar_com(map <int,combo> &com,map <int,producto> &inv); //240
 void iniciar_inv(map <int,producto> &inv); //260
 void iniciar_com(map <int,combo> &com); //297
 void cargar_usuarios(map <string,string> &usu); //341
