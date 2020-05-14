@@ -4,7 +4,7 @@ class combo
 {
 public:
     long long int costo;
-    void crear();
+    void crear(map <int,producto> inv);
     void iniciar(string cont, long long int cost, map <int,int> ff);
     string ver_combo();
     bool disponibilidad(map <int,producto> inv);

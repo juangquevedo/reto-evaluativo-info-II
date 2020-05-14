@@ -39,6 +39,9 @@ void producto::ver_producto(){
         cout<<" ";
     cout<<costo<<'|';
 }
+void producto::anadir_cant(int can){
+    cantidad+=can;
+}
 string producto::guardado(){
     //facilita la funcion de guardado retornando en un string los datos privados a guardar
     string datos;
@@ -47,6 +50,7 @@ string producto::guardado(){
 }
 
 string producto::int2str(int long a){
+    //esta funncion se usa para convertir las caracteristicas int a string y poder manejarlas mejor
     int c=0,i=1;
     char e;
     string b;

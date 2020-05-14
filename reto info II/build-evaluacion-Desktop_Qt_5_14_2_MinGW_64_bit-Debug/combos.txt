@@ -1,3 +1,6 @@
-1;Dos_perros_calientes_y_dos_gaseosas;35000;1-2;2-2;3-2
-2;Hamburguesa_mas_gaseosa;16500;1-1;4-1
-3;Nachos_mas_gaseosa;12000;1-1;7-1
+1;2_gaseosas_mas_2_perros_y_crispeta;36000;1-2;2-2;3-2;6-100;7-100;11-2
+2;Dos_gaseosas_y_crispeta;25000;1-2;7-100;11-2
+3;crispeta_mas_perro_y_gaseosa;16900;1-1;2-1;3-1;6-50;7-50;11-1
+4;crispeta_mas_gaseosa;17000;1-1;7-100;11-1
+5;perro_y_gaseosa_mas_chocolatina;18000;1-1;2-1;3-1;6-20;10-1;11-1
+6;Hamburguesa_mas_te;15900;4-1;5-1;9-1
